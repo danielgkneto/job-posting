@@ -26,13 +26,23 @@ public class DataLoader implements CommandLineRunner {
         Role adminRole = roleRepository.findByRole("ADMIN");
         Role userRole = roleRepository.findByRole("USER");
 
-        User user = new User("jim@jim.com", "password", "Jim", "Jimmerson", true,
+        User user = new User("daniel@email.com", "password", "Daniel", "Neto", true,
+                "danielgkneto");
+        user.setRoles(Arrays.asList(userRole));
+        userRepository.save(user);
+
+        jobRepository.save(new Job("Java Developer", "A Java developer is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "Microsoft", "(111) 111-1111", user));
+        jobRepository.save(new Job("Network Technician", "A Network Technician is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "Microsoft", "(111) 111-1111", user));
+        jobRepository.save(new Job("C# Developer", "A C# developer is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "IBM", "(333) 333-3333", user));
+        jobRepository.save(new Job("Project Manager", "A Project Manager is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "IBM", "(333) 333-3333", user));
+
+        user = new User("jim@example.com", "password", "Jim", "Jong", true,
                 "jim");
         user.setRoles(Arrays.asList(userRole));
         userRepository.save(user);
 
-/*        Car[] fakeCars = new Car[] {new Car("Toyota","Corolla","2010",11000, fakeCategories[0], user), new Car("Ford","Mustang","2018",88000, fakeCategories[3], user), new Car("Volkswagen","Beatle","1966",500, fakeCategories[2], user), new Car("Erat Volutpat Company","Debra","7399",34925, fakeCategories[1], user), new Car("Back to the Future","DeLorean","2000",100000, fakeCategories[3], user)};
-        carRepository.saveAll(Arrays.asList(fakeCars));*/
+        jobRepository.save(new Job("Database Administrator", "A Database Administrator is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "Amazon", "(888) 888-8888", user));
+        jobRepository.save(new Job("Game Developer", "A Game Developer is responsible for many duties throughout the development lifecycle of applications, from concept and design right through to testing.", "Bethesda", "(999) 999-9999", user));
 
         user = new User("admin@admin.com", "password",
                 "Admin",
