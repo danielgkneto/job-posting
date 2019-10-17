@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">Daniel's Job Posting</h1>
+        <h2 class="text-dark display-4 text-center title">Registration</h2>
+        <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+            <div class="form-group">
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+                <label for="firstname">First Name</label>
+                <input class="form-control" id="firstname" name="firstname" type="text" th:field="*{firstName}" />
+            </div>
+            <div class="form-group">
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+                <label for="lastname">Last Name</label>
+                <input class="form-control" id="lastname" name="lastname" type="text" th:field="*{lastName}" />
+            </div>
+            <div class="form-group">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+                <label for="email">Email</label>
+                <input class="form-control" id="email" name="email" type="email" th:field="*{email}" />
+            </div>
+            <div class="form-group">
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+                <label for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" th:field="*{username}" />
+            </div>
+            <div class="form-group">
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+                <label for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" th:field="*{password}" />
+            </div>
+            <input class="btn btn-primary btn-md" type="submit" value="Register">
+        </form>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>

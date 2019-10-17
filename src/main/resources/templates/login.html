@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+<head th:replace="base :: header" />
+<body>
+<div th:replace="base :: navlinks" />
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-dark display-3 text-center title">Daniel's Job Posting</h1>
+        <h2 class="text-dark display-4 text-center title">Login</h2>
+        <div class="alert alert-error" th:if="${param.error}">
+            Invalid username or password
+        </div>
+
+        <div class="alert alert-success" th:if="${param.logout}">
+            You have been logged out
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" />
+            </div>
+            <input class="btn btn-primary btn-md" type="submit" value="Sign In">
+        </form>
+    </div>
+</div>
+<div th:replace="base :: footer" />
+<div th:replace="base :: scripts" />
+
+</body>
+</html>
