@@ -5,15 +5,16 @@
 <div th:replace="base :: navlinks" />
 <div class="container">
     <div class="jumbotron">
-        <h1 class="text-dark display-3 text-center title">Job Details</h1>
-        <div class="card mx-auto" style="max-width: 300px">
+        <h1 class="text-dark display-3 text-center title">Daniel's Job Posting</h1>
+        <h2 class="text-dark display-4 text-center title">Job Details</h2>
+        <div class="card custom-card mx-auto" style="max-width: 300px">
             <h5 class="card-header">Posted on: <span th:text="${#dates.format(job.postedDate, 'dd-MMM-yyyy')}"></span></h5>
             <div class="card-body">
                 <h5 class="card-title text-center"><span th:text="${job.title}"></span></h5>
                 <p class="card-text text-justify">Description: <span th:text="${job.description}"></span></p>
                 <p class="card-text text-right"><small class="text-muted"><span th:text="${job.company}"></span> / <span th:text="${job.phone}"></span></small></p>
-                <a class="btn btn-primary btn-sm" href="/">Back</a>
-                <a class="btn btn-danger btn-sm" href="/delete">Delete</a>
+                <a class="btn btn-primary btn-sm" href="#" th:href="@{/}">Back</a>
+<!--                <a class="btn btn-danger btn-sm" href="/delete">Delete</a>-->
             </div>
         </div>
     </div>

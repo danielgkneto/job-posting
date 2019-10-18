@@ -100,7 +100,7 @@ public class HomeController {
     }
 
     @PostMapping("/processsearch")
-    public String searchResult(Model model,@RequestParam(name="search") String search) {
+    public String searchResult(Model model, @RequestParam(name="search") String search) {
         String[] keywords = search.split(" ");
         Set<Job> jobs = new HashSet<Job>();
 
