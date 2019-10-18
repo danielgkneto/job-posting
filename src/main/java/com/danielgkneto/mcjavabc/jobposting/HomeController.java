@@ -1,6 +1,8 @@
 package com.danielgkneto.mcjavabc.jobposting;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,15 +32,15 @@ public class HomeController {
     }
 
     @RequestMapping("/myjobs")
-    public String userJobList(Model model){
-        model.addAttribute("jobs", jobRepository.findAll());
+    public String userJobList(Model model, Principal principal){
+        model.addAttribute("jobs", jobRepository.findAllByUser(userRepository.findByUsername(principal.getName())));
         return "myjobs";
     }
 
     @GetMapping("/add")
     public String addJob(Model model){
-        model.addAttribute("job", new Job());
-        return "jobform";
+            model.addAttribute("job", new Job());
+            return "jobform";
     }
 
     @PostMapping("/processjob")
@@ -71,15 +73,30 @@ public class HomeController {
     }
 
     @RequestMapping("/update/{id}")
-    public String updateJob(@PathVariable("id") long id, Model model){
-        model.addAttribute("job", jobRepository.findById(id).get());
-        return "jobform";
+    public String updateJob(@PathVariable("id") long id, Model model, Principal principal) {
+//        User currentUser = userRepository.findByUsername(principal.getName());
+        if (jobRepository.findById(id).get().getUser().getUsername().equals(principal.getName())) {
+            model.addAttribute("job", jobRepository.findById(id).get());
+            return "jobform";
+        }
+        else {
+            model.addAttribute("error_message", "You can only update your own posts!");
+            model.addAttribute("return_link", "/myjobs");
+            return "error";
+        }
     }
 
     @RequestMapping("/delete/{id}")
-    public String delJob(@PathVariable("id") long id){
-        jobRepository.deleteById(id);
-        return "redirect:/";
+    public String delJob(@PathVariable("id") long id, Model model, Principal principal){
+        if (jobRepository.findById(id).get().getUser().getUsername().equals(principal.getName())) {
+            jobRepository.deleteById(id);
+            return "redirect:/";
+        }
+        else {
+            model.addAttribute("error_message", "You can only delete your own posts!");
+            model.addAttribute("return_link", "/myjobs");
+            return "error";
+        }
     }
 
     @PostMapping("/processsearch")
@@ -95,9 +112,16 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String showRegistrationPage(Model model) {
-        model.addAttribute("user", new User());
-        return "registration";
+    public String showRegistrationPage(Model model, Principal principal) {
+        if (principal == null) {
+            model.addAttribute("user", new User());
+            return "registration";
+        }
+        else {
+            model.addAttribute("error_message", "Log out before creating a new account!");
+            model.addAttribute("return_link", "/");
+            return "error";
+        }
     }
 
     @PostMapping("/register")
@@ -121,7 +145,14 @@ public class HomeController {
     }*/
 
     @RequestMapping("/login")
-    public String login(){
-        return "login";
+    public String login(Principal principal, Model model) {
+        if (principal == null) {
+            return "login";
+        }
+        else {
+            model.addAttribute("error_message", "You are already logged in!");
+            model.addAttribute("return_link", "/");
+            return "error";
+        }
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: header" />
 <body>
 <div th:replace="base :: navlinks" />
@@ -7,8 +7,8 @@
     <div class="jumbotron">
         <h1 class="text-dark display-3 text-center title">Daniel's Job Posting</h1>
         <h2 class="text-dark text-center title">Error!</h2>
-<!--        <h4 class="text-dark text-center title" th:text="${error_message}"></h4>
-        <a class="btn btn-primary btn-md" href="#" th:href="${return_link}">Back</a>-->
+        <h4 class="text-dark text-center title" th:text="${error_message}"></h4>
+        <a class="btn btn-primary btn-md" href="#" th:href="${return_link}">Back</a>
     </div>
 </div>
 <div th:replace="base :: footer" />

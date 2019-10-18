@@ -26,6 +26,7 @@
                 <td style="max-width: 140px" class="text-truncate" th:text="${job.phone}"></td>
                 <td th:text="${#dates.format(job.postedDate, 'dd-MMM-yyyy')}"></td>
                 <td>
+                    <!--TODO center align actions buttons or make the whole row clickable and get rid of actions -->
                     <a data-toggle="tooltip" title="Details" class="btn btn-info btn-sm" th:href="@{/detail/{id}(id=${job.id})}"><span class="fa fa-eye" aria-hidden="true"></span></a>
                     <a data-toggle="tooltip" title="Update" class="btn btn-primary btn-sm" th:if="${job.user.username} == ${#httpServletRequest.remoteUser}" th:href="@{/update/{id}(id=${job.id})}"><span class="fa fa-edit" aria-hidden="true"></span></a>
                     <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-sm" th:if="${job.user.username} == ${#httpServletRequest.remoteUser}" th:href="@{/delete/{id}(id=${job.id})}"><span class="fa fa-trash" aria-hidden="true"></span></a>
@@ -33,7 +34,7 @@
             </tr>
             </tbody>
         </table>
-        <a class="btn btn-primary btn-md" href="#" th:href="@{/addjob}">Add a Job</a>
+<!--        <a class="btn btn-primary btn-md" href="#" th:href="@{/addjob}">Add a Job</a>-->
     </div>
 </div>
 <div th:replace="base :: footer" />
