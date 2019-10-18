@@ -3,6 +3,8 @@ package com.danielgkneto.mcjavabc.jobposting;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ public class User {
     private long id;
 
     @Column(name = "email", nullable = false)
+    @NotEmpty
     private String email;
 
     @Column(name = "password")
@@ -29,6 +32,7 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @NotEmpty
     @Column(name = "username")
     private String username;
 
