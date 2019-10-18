@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class HomeController {
     @RequestMapping("/detail/{id}")
     public String showJob(@PathVariable("id") long id, Model model){
         model.addAttribute("job", jobRepository.findById(id).get());
-        return "show";
+        return "showjob";
     }
 
     @RequestMapping("/update/{id}")
